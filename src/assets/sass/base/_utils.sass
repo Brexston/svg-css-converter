@@ -1,10 +1,3 @@
-// Переменные
-$black: #000
-$white: #fff
-
-
-
-
 // Функции
 @function createRandomShadow($n) 
 	$value: '#{random(2000)}px #{random(2000)}px #FFF'
@@ -13,9 +6,23 @@ $white: #fff
 
 	@return unquote($value)
 
+
+
+// Константы
+$black: #000
+$white: #fff
+$smoke: #aeaeae
+$silver: #EEE
+
 $shadows-small: createRandomShadow(700)
 $shadows-medium: createRandomShadow(200)
 $shadows-big: createRandomShadow(100)
 
 
+
+
+
 // Миксины
+=text-style($font-size:14px,$line-height:normal)
+	font-size: $font-size
+	line-height: $line-height

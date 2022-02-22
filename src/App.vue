@@ -1,26 +1,38 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-
-  <div class="star">
-    <div class="star__item star__item--1"></div>
-    <div class="star__item star__item--2"></div>
-    <div class="star__item star__item--3"></div>
-  </div>
+	<div class="layout">
+		<Header/>
+		<HelloWorld msg="Welcome to Your Vue.js App"/>
+		
+	</div>
+	<AnimateBg/>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header'
+import AnimateBg from './components/AnimateBg'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+	components: {
+		HelloWorld,
+		AnimateBg,
+		Header
+	}
 }
 </script>
 
 <style lang="sass">
 @import "./assets/sass/main"
 
+.layout
+	width: 100%
+	max-width: 800px
+	background: $white
+	margin: 40px auto
+	border-radius: 25px
+	padding: 25px
+
+
+	
 
 </style>
