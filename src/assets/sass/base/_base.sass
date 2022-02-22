@@ -3,4 +3,28 @@ body
     background: radial-gradient(ellipse at bottom, #5f8bbf 0%, #090A0F 100%)
     overflow: hidden
     margin: 0
-    
+    font-family: 'CeraPro', sans-serif
+a
+    text-decoration: none
+    color: $white
+input,textarea
+    box-sizing: border-box
+
+.textarea
+    &__top
+        +flex(space-between,center)
+        margin-bottom: 8px
+    &__label
+        display: block
+    &__copied
+        +text-style(14px,16px)
+        cursor: pointer
+    &__item
+        width: 100%
+        min-height: 150px
+        max-height: 200px
+        resize: vertical
+        border: 1px solid $smoke
+        padding: 10px
+        &:focus
+            outline: none

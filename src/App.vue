@@ -1,22 +1,25 @@
 <template>
 	<div class="layout">
 		<Header/>
-		<HelloWorld msg="Welcome to Your Vue.js App"/>
-		
+		<Converter/>
+		<Footer/>
 	</div>
 	<AnimateBg/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header'
+import Converter from './components/Converter'
+import Footer from './components/Footer'
 import AnimateBg from './components/AnimateBg'
+
 
 export default {
 	components: {
-		HelloWorld,
+		Header,
+		Converter,
 		AnimateBg,
-		Header
+		Footer
 	}
 }
 </script>
@@ -31,6 +34,7 @@ export default {
 	margin: 40px auto
 	border-radius: 25px
 	padding: 25px
+	position: relative
 
 
 	

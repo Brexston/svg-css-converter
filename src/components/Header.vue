@@ -1,8 +1,9 @@
 <template>
   <header class="header">
-    <h1 class="header__title">Svg encoder to base64</h1>
+    <h1 class="header__title">Конвертируйте свой SVG в CSS </h1>
     <div class="header__description">
-      Переведи свою иконку SVG для использования в CSS, закодированный SVG можно
+        С помощью данного сервиса вы можете закодировать свою иконку
+        SVG для использования в CSS через data URI, закодированный SVG можно
       использовать в <code>background</code>, <code>border-image</code> или в
       <code>mask</code>
     </div>
@@ -15,7 +16,10 @@
     border-bottom: 1px solid $smoke
     margin: 0 0 36px
     &__title
-        text-align: center
+        text:
+            align: center
+            transform: uppercase
+        +text-style(32px, 40px)
     &__description
         max-width: 600px
         margin: 0 auto
