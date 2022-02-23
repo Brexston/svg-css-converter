@@ -6,7 +6,7 @@
 					<div class="textarea__top">
 						<label for="insert" class="textarea__label">Вставьте код SVG:</label>
 					</div>
-					<textarea id="insert" class="textarea__item" v-on:input="convertSvg(insertSvg.textarea)" v-model="insertSvg.textarea"></textarea>
+					<textarea id="insert" autofocus class="textarea__item" v-on:input="convertSvg(insertSvg.textarea)" v-model="insertSvg.textarea"></textarea>
 				</div>
 			</div>
 			<div class="converter__item converter__item--preview">
@@ -34,8 +34,13 @@
 							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Полная запись</div>
 						</div>
 					</div>
-					<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.short"></textarea>
-					<textarea v-else class="textarea__item" v-model="result.textarea.long"></textarea>
+					<div class="textarea__block">
+						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.short"></textarea>
+						<textarea v-else class="textarea__item" v-model="result.textarea.long"></textarea>
+						<div class="copy" @click="copyCss" :class="{active: insertSvg.textarea}">
+							Скопировать
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -67,7 +72,8 @@ export default {
 				}
 			},
 			settings: {
-				repeat: 'no-repeat'
+				repeat: 'no-repeat',
+				position: 'center'
 
 			}
 		}
@@ -75,11 +81,18 @@ export default {
 
 	methods: {
 		convertSvg(text) {
-			text = this.addXmlns(text)
-			text = this.encodeSvg(text)
-			this.preview.image = `'data:image/svg+xml,${text}'`
-			this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat};`
-			this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: center;`
+			if(text) {
+				text = this.addXmlns(text)
+				text = this.encodeSvg(text)
+				this.preview.image = `'data:image/svg+xml,${text}'`
+				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
+				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
+			}
+			else {
+				this.preview.image = ''
+				this.result.textarea.short = ''
+				this.result.textarea.long = ''
+			}
 		},
 
 		addXmlns(text) {
@@ -95,6 +108,12 @@ export default {
 			text = text.replace(/\s{2,}/g, ` `);
 			const symbols = /[\r\n%#()<>?[\\\]^`{|}]/g;			
 			return text.replace(symbols, encodeURIComponent);
+		},
+		
+		copyCss(event) {
+            event.target.previousElementSibling.select()
+            document.execCommand("copy")
+
 		}
 
 
@@ -111,6 +130,20 @@ export default {
 	&__item
 		&--result
 			grid-column: span 2
+			.copy
+				position: absolute
+				right: 10px
+				bottom: 5px
+				cursor: pointer
+				padding: 8px
+				+text-style(14px)
+				background: $blue
+				border-radius: 10px
+				color: $white
+				transition: transform 0.3s
+				transform: translateY(115%)
+				&.active
+					transform: translateY(0)
 		&--preview
 			.preview
 				display: flex 

@@ -16,19 +16,20 @@ input,textarea
         margin-bottom: 8px
     &__label
         display: block
-    &__copied
-        +text-style(14px,16px)
-        cursor: pointer
+    &__block
+        position: relative
+        overflow: hidden
     &__item
         width: 100%
         min-height: 150px
         max-height: 200px
         resize: vertical
         border: 1px solid $smoke
-        padding: 10px
+        padding: 8px
         display: block
         &:focus
             outline: none
+        +Vscroll
     &__tab
         display: grid
         grid-template-columns: 1fr 1fr
@@ -41,6 +42,7 @@ input,textarea
             border-radius: 5px 5px 0 0
             cursor: pointer
             transition: 0.3s
+            text-align: center
             &.active
                 background: $blue
                 color: $white

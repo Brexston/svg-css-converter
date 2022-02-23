@@ -2,7 +2,7 @@
 @function createRandomShadow($n) 
 	$value: '#{random(2000)}px #{random(2000)}px #FFF'
 	@for $i from 2 through $n
-		$value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+		$value: '#{$value} , #{random(2560)}px #{random(2560)}px #FFF'
 
 	@return unquote($value)
 
@@ -16,8 +16,8 @@ $smoke: #aeaeae
 $silver: #eee
 $palladium: #b3b3b3
 
-$shadows-small: createRandomShadow(700)
-$shadows-medium: createRandomShadow(200)
+$shadows-small: createRandomShadow(1200)
+$shadows-medium: createRandomShadow(400)
 $shadows-big: createRandomShadow(100)
 
 
@@ -33,3 +33,15 @@ $shadows-big: createRandomShadow(100)
 	display: flex
 	justify-content: $justify-content
 	align-items: $align-items
+
+=Vscroll()
+	scrollbar-color: $silver
+	scrollbar-width: thin
+	&::-webkit-scrollbar
+		width: 6px
+		appearance: none
+		-webkit-appearance: none
+	&::-webkit-scrollbar-track
+		background: $silver
+	&::-webkit-scrollbar-thumb
+		background-color: $blue
