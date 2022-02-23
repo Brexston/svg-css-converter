@@ -35,6 +35,21 @@
                 </div>
             </div>
 
+            <div class="converter__item converter__item--settings">
+                <div class="settings">
+                    <div class="settings__top">
+                        <div class="settings__label">Дополнительные настройки</div>
+                    </div>
+                    <div class="settings__tab">
+                        <div class="settings__tab-item active">Короткая запись</div>
+                        <div class="settings__tab-item">Полная запись</div>
+                    </div>
+                    <div class="settings__checkbox">
+                        s
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </main>
@@ -65,10 +80,11 @@ export default {
         grid-gap: 24px
         grid-template-columns: repeat(2, 1fr)
     &__item
-        &--insert
-                //grid-column: span 2
         &--preview
             .preview
+                display: flex 
+                flex-direction: column
+                height: 100%
                 &__top
                     +flex(space-between,center)
                     margin-bottom: 8px
@@ -103,7 +119,36 @@ export default {
 
                 &__block
                     border: 1px solid $smoke
-                    height: 150px
+                    height: 100%
                     transition: 0.3s
-        
+        &--settings
+            .settings
+                display: flex
+                flex-direction: column
+                height: 100%
+                &__label
+                    margin-bottom: 8px
+                &__tab
+                    display: grid
+                    grid-template-columns: 1fr 1fr
+                    gap: 8px
+                    &-item
+                        background: $palladium
+                        padding: 8px
+                        +text-style(14px)
+                        border-radius: 5px 5px 0 0
+                        cursor: pointer
+                        &.active
+                            background: $blue
+                            color: $white
+                            pointer-events: none
+                &__checkbox
+                    height: 100%
+                    border: 1px solid $palladium
+                    border:
+                        radius: 0 0 3px 3px
+                        width: 0 1px 1px
+                    
+                
+
 </style>

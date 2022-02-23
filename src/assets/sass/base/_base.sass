@@ -26,5 +26,42 @@ input,textarea
         resize: vertical
         border: 1px solid $smoke
         padding: 10px
+        display: block
         &:focus
             outline: none
+.checkbox
+    position: relative
+    + .checkbox
+        margin-top: 10px
+    &__input
+        appearance: none
+        position: absolute
+        top: 0
+        left: 0
+        width: 0
+        height: 0
+        opacity: 0
+
+    &__label
+        position: relative
+        display: flex
+        cursor: pointer
+        font-size: 16px
+        line-height: 22px
+        &::selection
+            background: transparent
+            color: $blue
+        &::before
+            content: ''
+            position: relative
+            display: block
+            size: 22px
+            border: 1px solid $blue
+            background-color: #fff
+            margin-right: 18px
+            flex: none
+            background: url("data:image/svg+xml,%0A%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath opacity='0.2' d='M1 3.5L5 8L10.5 1.5' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center
+    &__input:checked
+        + .checkbox__label
+            &::before
+                background: url("data:image/svg+xml,%0A%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3.5L5 8L10.5 1.5' stroke='%23B01E19' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center
