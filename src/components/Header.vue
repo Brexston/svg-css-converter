@@ -20,6 +20,7 @@
             align: center
             transform: uppercase
         +text-style(32px, 40px)
+        margin: 0 0 25px
     &__description
         max-width: 600px
         margin: 0 auto

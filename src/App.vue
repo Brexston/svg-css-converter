@@ -33,7 +33,7 @@ export default {
 	background: $white
 	margin: 40px auto
 	border-radius: 25px
-	padding: 25px
+	padding: 45px 25px
 	position: relative
 
 
