@@ -21,39 +21,23 @@
 						</div>
 					</div>
 					<div class="preview__block" :style="{'background': preview.background}">
-						<div class="preview__block-image" :style="`background: url(${preview.image}) no-repeat center`"></div>
+						<div class="preview__block-image" :style="`background: url(${preview.image}) no-repeat`"></div>
 					</div>
 				</div>
 			</div>
 			<div class="converter__item converter__item--result">
 				<div class="textarea">
 					<div class="textarea__top">
-						<label for="result" class="textarea__label">Готовый CSS для фона:</label>
-						<div class="textarea__copied">Скопировать</div>
-					</div>
-					<textarea id="result" class="textarea__item"></textarea>
-				</div>
-			</div>
-
-			<div class="converter__item converter__item--settings">
-				<div class="settings">
-					<div class="settings__top">
-						<div class="settings__label">Дополнительные настройки:</div>
-					</div>
-					<div class="settings__tab">
-						<div class="settings__tab-item active">Короткая запись</div>
-						<div class="settings__tab-item">Полная запись</div>
-					</div>
-					<div class="settings__checkbox">
-						<div class="checkbox">
-							<input class="checkbox__input" type="checkbox"  id="repeat">
-							<label class="checkbox__label" for="repeat">Повтор фона</label>
+						<label class="textarea__label">Готовый CSS для фона:</label>
+						<div class="textarea__tab">
+							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Полная запись</div>
 						</div>
 					</div>
+					<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.short"></textarea>
+					<textarea v-else class="textarea__item" v-model="result.textarea.long"></textarea>
 				</div>
 			</div>
-
-
 		</div>
 	</main>
 </template>
@@ -66,6 +50,7 @@ export default {
 
 	data() {
 		return {
+			cssType: 1,
 			insertSvg: {
 				textarea: ''
 			},
@@ -76,7 +61,14 @@ export default {
 				image: ''
 			},
 			result: {
-				textarea: ''
+				textarea: {
+					short: '',
+					long: ''
+				}
+			},
+			settings: {
+				repeat: 'no-repeat'
+
 			}
 		}
 	},
@@ -86,6 +78,8 @@ export default {
 			text = this.addXmlns(text)
 			text = this.encodeSvg(text)
 			this.preview.image = `'data:image/svg+xml,${text}'`
+			this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat};`
+			this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: center;`
 		},
 
 		addXmlns(text) {
@@ -115,6 +109,8 @@ export default {
 		grid-gap: 24px
 		grid-template-columns: repeat(2, 1fr)
 	&__item
+		&--result
+			grid-column: span 2
 		&--preview
 			.preview
 				display: flex 
@@ -160,35 +156,6 @@ export default {
 					padding: 8px
 					&-image
 						height: 100%
-		&--settings
-			.settings
-				display: flex
-				flex-direction: column
-				height: 100%
-				&__label
-					margin-bottom: 8px
-				&__tab
-					display: grid
-					grid-template-columns: 1fr 1fr
-					gap: 8px
-					&-item
-						background: $palladium
-						padding: 8px
-						+text-style(14px)
-						border-radius: 5px 5px 0 0
-						cursor: pointer
-						&.active
-							background: $blue
-							color: $white
-							pointer-events: none
-				&__checkbox
-					height: 100%
-					border: 1px solid $palladium
-					border:
-						radius: 0 0 3px 3px
-						width: 0 1px 1px
-					padding: 8px
-					
 				
 
 </style>

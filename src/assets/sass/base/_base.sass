@@ -29,6 +29,22 @@ input,textarea
         display: block
         &:focus
             outline: none
+    &__tab
+        display: grid
+        grid-template-columns: 1fr 1fr
+        gap: 8px
+        margin-bottom: -8px
+        &-item
+            background: $palladium
+            padding: 8px
+            +text-style(14px)
+            border-radius: 5px 5px 0 0
+            cursor: pointer
+            transition: 0.3s
+            &.active
+                background: $blue
+                color: $white
+                pointer-events: none
 .checkbox
     position: relative
     + .checkbox
