@@ -138,7 +138,7 @@ export default {
 				padding: 8px
 				+text-style(14px)
 				background: $blue
-				border-radius: 10px
+				border-radius: 5px
 				color: $white
 				transition: transform 0.3s
 				transform: translateY(115%)

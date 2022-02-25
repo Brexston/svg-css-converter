@@ -1,4 +1,3 @@
-
 module.exports = {
   css: {
     loaderOptions: {
@@ -6,5 +5,9 @@ module.exports = {
         additionalData: `@import "~@/assets/sass/base/_utils.sass"`,
       }
     }
-  }
+  },
+  configureWebpack: {
+    devtool: "source-map",
+  },
+  publicPath: './'
 }
