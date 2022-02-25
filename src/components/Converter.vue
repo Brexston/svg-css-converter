@@ -5,8 +5,9 @@
 				<div class="textarea">
 					<div class="textarea__top">
 						<label for="insert" class="textarea__label">Вставьте код SVG:</label>
+						<div class="textarea__example" @click="viewExample">Пример</div>
 					</div>
-					<textarea id="insert" autofocus class="textarea__item" v-on:input="convertSvg(insertSvg.textarea)" v-model="insertSvg.textarea"></textarea>
+					<textarea id="insert" autofocus class="textarea__item" v-on:input="convertSvg" v-model="insertSvg.textarea"></textarea>
 				</div>
 			</div>
 			<div class="converter__item converter__item--preview">
@@ -80,7 +81,8 @@ export default {
 	},
 
 	methods: {
-		convertSvg(text) {
+		convertSvg() {
+			let text = this.insertSvg.textarea
 			if(text) {
 				text = this.addXmlns(text)
 				text = this.encodeSvg(text)
@@ -113,6 +115,11 @@ export default {
 		copyCss(event) {
             event.target.previousElementSibling.select()
             document.execCommand("copy")
+		},
+
+		viewExample() {
+			this.insertSvg.textarea = '<svg width="58" height="59" viewBox="0 0 58 59" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
+			this.convertSvg()
 
 		}
 
