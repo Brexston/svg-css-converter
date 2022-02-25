@@ -1,24 +1,16 @@
-# svg-encoder
+# SVG to CSS converter
 
-## Project setup
-```
-npm install
-```
+https://brexston.github.io/svg-css-converter/
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Описание
 
-### Compiles and minifies for production
 ```
-npm run build
+1. Возьмите своё SVG изображение
+2. Скопируйте его код в поле
+3. Просмотрите превью
+4. Выберите желаемую запись CSS кода(полная или коротка)
+5. Скопируйте получившийся CSS
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
