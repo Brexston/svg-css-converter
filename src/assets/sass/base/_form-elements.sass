@@ -1,0 +1,90 @@
+.textarea
+    &__top
+        +flex(space-between,center)
+        margin-bottom: 8px
+    &__label
+        display: block
+    &__block
+        position: relative
+        overflow: hidden
+    &__example
+        +text-style(14px)
+        cursor: pointer
+        transition: 0.3s
+        &:hover
+            color: $yellow
+    &__settings
+        margin: 0 16px -5px auto
+        width: 25px
+        height: 25px
+        transition: 0.3s
+        cursor: pointer
+        background: url('data:image/svg+xml,%3Csvg enable-background="new 0 0 64 64" height="25px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"%3E%3Cg%3E%3Ccircle fill="%23b3b3b3" cx="32" cy="32" r="4.167"/%3E%3Cpath d="M55.192,27.87l-5.825-1.092c-0.354-1.178-0.818-2.308-1.392-3.371l3.37-4.927c0.312-0.456,0.248-1.142-0.143-1.532 l-4.155-4.156c-0.391-0.391-1.076-0.454-1.532-0.143l-4.928,3.372c-1.094-0.59-2.259-1.063-3.473-1.42l-1.086-5.794 c-0.103-0.543-0.632-0.983-1.185-0.983h-5.877c-0.553,0-1.082,0.44-1.185,0.983l-1.097,5.851c-1.165,0.356-2.282,0.82-3.334,1.392 l-4.866-3.329c-0.456-0.312-1.142-0.248-1.532,0.143l-4.156,4.156c-0.391,0.391-0.454,1.076-0.143,1.532l3.35,4.896 c-0.564,1.052-1.021,2.168-1.371,3.331L8.808,27.87c-0.542,0.103-0.982,0.632-0.982,1.185v5.877c0,0.553,0.44,1.082,0.982,1.185 l5.82,1.091c0.355,1.188,0.823,2.328,1.401,3.399l-3.312,4.842c-0.312,0.456-0.248,1.142,0.143,1.532l4.155,4.156 c0.391,0.391,1.076,0.454,1.532,0.143l4.84-3.313c1.041,0.563,2.146,1.021,3.299,1.375l1.097,5.852 c0.103,0.542,0.632,0.982,1.185,0.982h5.877c0.553,0,1.082-0.44,1.185-0.982l1.086-5.796c1.201-0.354,2.354-0.821,3.438-1.401 l4.902,3.354c0.456,0.312,1.142,0.248,1.532-0.143l4.155-4.154c0.391-0.391,0.454-1.076,0.143-1.532l-3.335-4.874 c0.589-1.084,1.063-2.237,1.423-3.44l5.819-1.091c0.542-0.103,0.982-0.632,0.982-1.185v-5.877 C56.175,28.502,55.734,27.973,55.192,27.87z M32,42.085c-5.568,0-10.083-4.515-10.083-10.086c0-5.567,4.515-10.083,10.083-10.083 c5.57,0,10.086,4.516,10.086,10.083C42.086,37.57,37.569,42.085,32,42.085z" fill="%23b3b3b3"/%3E%3C/g%3E%3C/svg%3E') no-repeat center
+        &:hover
+            transform: rotate(45deg)
+            background: url('data:image/svg+xml,%3Csvg enable-background="new 0 0 64 64" height="25px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"%3E%3Cg%3E%3Ccircle fill="%23FDC420" cx="32" cy="32" r="4.167"/%3E%3Cpath d="M55.192,27.87l-5.825-1.092c-0.354-1.178-0.818-2.308-1.392-3.371l3.37-4.927c0.312-0.456,0.248-1.142-0.143-1.532 l-4.155-4.156c-0.391-0.391-1.076-0.454-1.532-0.143l-4.928,3.372c-1.094-0.59-2.259-1.063-3.473-1.42l-1.086-5.794 c-0.103-0.543-0.632-0.983-1.185-0.983h-5.877c-0.553,0-1.082,0.44-1.185,0.983l-1.097,5.851c-1.165,0.356-2.282,0.82-3.334,1.392 l-4.866-3.329c-0.456-0.312-1.142-0.248-1.532,0.143l-4.156,4.156c-0.391,0.391-0.454,1.076-0.143,1.532l3.35,4.896 c-0.564,1.052-1.021,2.168-1.371,3.331L8.808,27.87c-0.542,0.103-0.982,0.632-0.982,1.185v5.877c0,0.553,0.44,1.082,0.982,1.185 l5.82,1.091c0.355,1.188,0.823,2.328,1.401,3.399l-3.312,4.842c-0.312,0.456-0.248,1.142,0.143,1.532l4.155,4.156 c0.391,0.391,1.076,0.454,1.532,0.143l4.84-3.313c1.041,0.563,2.146,1.021,3.299,1.375l1.097,5.852 c0.103,0.542,0.632,0.982,1.185,0.982h5.877c0.553,0,1.082-0.44,1.185-0.982l1.086-5.796c1.201-0.354,2.354-0.821,3.438-1.401 l4.902,3.354c0.456,0.312,1.142,0.248,1.532-0.143l4.155-4.154c0.391-0.391,0.454-1.076,0.143-1.532l-3.335-4.874 c0.589-1.084,1.063-2.237,1.423-3.44l5.819-1.091c0.542-0.103,0.982-0.632,0.982-1.185v-5.877 C56.175,28.502,55.734,27.973,55.192,27.87z M32,42.085c-5.568,0-10.083-4.515-10.083-10.086c0-5.567,4.515-10.083,10.083-10.083 c5.57,0,10.086,4.516,10.086,10.083C42.086,37.57,37.569,42.085,32,42.085z" fill="%23FDC420"/%3E%3C/g%3E%3C/svg%3E') no-repeat center
+
+    &__item
+        width: 100%
+        min-height: 150px
+        max-height: 200px
+        resize: vertical
+        border: 1px solid $smoke
+        padding: 8px
+        display: block
+        &:focus
+            outline: none
+        +Vscroll
+    &__tab
+        display: grid
+        grid-template-columns: 1fr 1fr
+        gap: 8px
+        margin-bottom: -8px
+        &-item
+            background: $palladium
+            padding: 8px
+            +text-style(14px)
+            border-radius: 5px 5px 0 0
+            cursor: pointer
+            transition: 0.3s
+            text-align: center
+            &.active
+                background: $blue
+                color: $white
+                pointer-events: none
+.checkbox
+    position: relative
+    + .checkbox
+        margin-top: 10px
+    &__input
+        appearance: none
+        position: absolute
+        top: 0
+        left: 0
+        width: 0
+        height: 0
+        opacity: 0
+
+    &__label
+        position: relative
+        display: flex
+        cursor: pointer
+        font-size: 16px
+        line-height: 22px
+        &::selection
+            background: transparent
+            color: $blue
+        &::before
+            content: ''
+            position: relative
+            display: block
+            width: 22px
+            height: 22px
+            border: 1px solid $blue
+            background-color: #fff
+            margin-right: 18px
+            flex: none
+    &__input:checked
+        + .checkbox__label
+            &::before
+                background: url("data:image/svg+xml,%0A%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3.5L5 8L10.5 1.5' stroke='%23B01E19' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center

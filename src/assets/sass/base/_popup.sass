@@ -1,0 +1,50 @@
+.popup
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 50
+    width: 100%
+    height: 100vh
+    background: rgba(0, 0, 0, 0.6)
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 30px 20px
+    overflow-y: auto
+    overscroll-behavior: contain
+    will-change: opacity
+    &__block
+        will-change: transform, opacity
+        padding: 32px 24px
+        border-radius: 25px
+        margin: auto
+        transition: transform .5s, opacity .4s
+        background: $white
+        position: relative
+        width: 100%
+        max-width: 615px
+        opacity: 1
+        display: flex
+        flex-direction: column
+        align-items: center
+    &__close
+        position: absolute
+        width: 30px
+        height: 30px
+        top: 20px
+        right: 10px
+        cursor: pointer
+        transition: 0.3s
+        background: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M9.46585 8.01412L15.6959 1.78385C16.1014 1.37859 16.1014 0.723353 15.6959 0.3181C15.2907 -0.0871532 14.6354 -0.0871532 14.2302 0.3181L7.99992 6.54837L1.76983 0.3181C1.36439 -0.0871532 0.709336 -0.0871532 0.304083 0.3181C-0.101361 0.723353 -0.101361 1.37859 0.304083 1.78385L6.53417 8.01412L0.304083 14.2444C-0.101361 14.6496 -0.101361 15.3049 0.304083 15.7101C0.506045 15.9123 0.771595 16.0138 1.03696 16.0138C1.30232 16.0138 1.56768 15.9123 1.76983 15.7101L7.99992 9.47986L14.2302 15.7101C14.4323 15.9123 14.6977 16.0138 14.9631 16.0138C15.2284 16.0138 15.4938 15.9123 15.6959 15.7101C16.1014 15.3049 16.1014 14.6496 15.6959 14.2444L9.46585 8.01412Z' fill='black'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='16' height='16' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E") no-repeat center
+        &:hover
+            opacity: 0.7
+    
+    &__title
+        text-align: center
+        +text-style(25px)
+        margin-bottom: 24px
+
+.modal-enter-active, .modal-leave-to
+    opacity: 0
+    & .popup__block
+        transform: scale(0.5)

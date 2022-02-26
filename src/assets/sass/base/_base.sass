@@ -9,80 +9,10 @@ a
     color: $white
 input,textarea
     box-sizing: border-box
-
-.textarea
-    &__top
-        +flex(space-between,center)
-        margin-bottom: 8px
-    &__label
-        display: block
-    &__block
-        position: relative
-        overflow: hidden
-    &__example
-        +text-style(14px)
-        
-    &__item
-        width: 100%
-        min-height: 150px
-        max-height: 200px
-        resize: vertical
-        border: 1px solid $smoke
-        padding: 8px
-        display: block
-        &:focus
-            outline: none
-        +Vscroll
-    &__tab
-        display: grid
-        grid-template-columns: 1fr 1fr
-        gap: 8px
-        margin-bottom: -8px
-        &-item
-            background: $palladium
-            padding: 8px
-            +text-style(14px)
-            border-radius: 5px 5px 0 0
-            cursor: pointer
-            transition: 0.3s
-            text-align: center
-            &.active
-                background: $blue
-                color: $white
-                pointer-events: none
-.checkbox
-    position: relative
-    + .checkbox
-        margin-top: 10px
-    &__input
-        appearance: none
-        position: absolute
-        top: 0
-        left: 0
-        width: 0
-        height: 0
-        opacity: 0
-
-    &__label
-        position: relative
-        display: flex
-        cursor: pointer
-        font-size: 16px
-        line-height: 22px
-        &::selection
-            background: transparent
-            color: $blue
-        &::before
-            content: ''
-            position: relative
-            display: block
-            width: 22px
-            height: 22px
-            border: 1px solid $blue
-            background-color: #fff
-            margin-right: 18px
-            flex: none
-    &__input:checked
-        + .checkbox__label
-            &::before
-                background: url("data:image/svg+xml,%0A%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3.5L5 8L10.5 1.5' stroke='%23B01E19' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center
+button
+    padding: 0
+    border: none
+    font: inherit
+    color: inherit
+    background-color: transparent
+    cursor: pointer

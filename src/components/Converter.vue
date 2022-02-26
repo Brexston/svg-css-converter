@@ -5,7 +5,7 @@
 				<div class="textarea">
 					<div class="textarea__top">
 						<label for="insert" class="textarea__label">Вставьте код SVG:</label>
-						<div class="textarea__example" @click="viewExample">Пример</div>
+						<button class="textarea__example" @click="viewExample">Пример</button>
 					</div>
 					<textarea id="insert" autofocus class="textarea__item" v-on:input="convertSvg" v-model="insertSvg.textarea"></textarea>
 				</div>
@@ -30,6 +30,7 @@
 				<div class="textarea">
 					<div class="textarea__top">
 						<label class="textarea__label">Готовый CSS для фона:</label>
+						<div class="textarea__settings" @click="showSettingsPopup = true" ></div>
 						<div class="textarea__tab">
 							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
 							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Полная запись</div>
@@ -45,15 +46,19 @@
 				</div>
 			</div>
 		</div>
+
+		<transition name="modal">
+            <SettingsPopup v-if="showSettingsPopup" @confirm="deleteLink"  @close="showSettingsPopup = false" />
+        </transition>
 	</main>
 </template>
 
 <script>
-
+import SettingsPopup from "@/components/SettingsPopup"
 
 export default {
 	name: "Converter",
-
+	components: {SettingsPopup},
 	data() {
 		return {
 			cssType: 1,
@@ -76,7 +81,8 @@ export default {
 				repeat: 'no-repeat',
 				position: 'center'
 
-			}
+			},
+			showSettingsPopup: false,
 		}
 	},
 
@@ -120,9 +126,7 @@ export default {
 		viewExample() {
 			this.insertSvg.textarea = '<svg width="58" height="59" viewBox="0 0 58 59" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
 			this.convertSvg()
-
 		}
-
 
 	}
 }
