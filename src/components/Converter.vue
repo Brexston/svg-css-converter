@@ -24,13 +24,19 @@
 					<div class="preview__block" :style="{'background': preview.background}">
 						<div class="preview__block-image" :style="`background: url(${preview.image}) no-repeat`"></div>
 					</div>
+					<div class="preview__direction" :class="{active: insertSvg.textarea}">
+						<div class="preview__direction-item preview__direction--top" @click="changePosition('top')" title="top"></div>
+						<div class="preview__direction-item preview__direction--left" @click="changePosition('left')" title="left"></div>
+						<div class="preview__direction-item preview__direction--center" @click="changePosition('center')" title="center"></div>
+						<div class="preview__direction-item preview__direction--right" @click="changePosition('right')" title="right"></div>
+						<div class="preview__direction-item preview__direction--bottom" @click="changePosition('bottom')" title="bottom"></div>
+					</div>
 				</div>
 			</div>
 			<div class="converter__item converter__item--result">
 				<div class="textarea">
 					<div class="textarea__top">
 						<label class="textarea__label">Готовый CSS для фона:</label>
-						<div class="textarea__settings" @click="showSettingsPopup = true" ></div>
 						<div class="textarea__tab">
 							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
 							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Полная запись</div>
@@ -47,18 +53,13 @@
 			</div>
 		</div>
 
-		<transition name="modal">
-            <SettingsPopup v-if="showSettingsPopup" @confirm="deleteLink"  @close="showSettingsPopup = false" />
-        </transition>
 	</main>
 </template>
 
 <script>
-import SettingsPopup from "@/components/SettingsPopup"
 
 export default {
 	name: "Converter",
-	components: {SettingsPopup},
 	data() {
 		return {
 			cssType: 1,
@@ -126,6 +127,11 @@ export default {
 		viewExample() {
 			this.insertSvg.textarea = '<svg width="58" height="59" viewBox="0 0 58 59" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
 			this.convertSvg()
+		},
+		changePosition(direction) {
+
+			this.settings.position = direction
+			this.convertSvg()
 		}
 
 	}
@@ -160,6 +166,8 @@ export default {
 				display: flex 
 				flex-direction: column
 				height: 100%
+				position: relative
+				overflow: hidden
 				&__top
 					+flex(space-between,center)
 					margin-bottom: 8px
@@ -191,7 +199,52 @@ export default {
 							opacity: 0
 							width: 100%
 							height: 100%
+				&__direction
+					position: absolute
+					right: 10px
+					bottom: 10px
+					width: 54px
+					height: 54px
+					display: grid
+					grid-template-columns: repeat(3,1fr)
+					grid-gap: 5px
+					transition: 0.3s
+					transform: translateY(130%)
+					background: $white
+					border-radius: 8px
+					padding: 5px
+					&.active
+						transform: translateY(0)
+					&-item
+						display: block
+						width: 16px
+						height: 12px
+						cursor: pointer
+						transition: 0.3s
+						background: url('data:image/svg+xml,%0A%3Csvg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 7L12.17 7L8.59 10.59L10 12L16 6L10 0L8.59 1.41L12.17 5L1.74846e-07 5L0 7Z" fill="%235f8bbf"/%3E%3C/svg%3E%0A') no-repeat center
+						&:hover
+							background: url('data:image/svg+xml,%0A%3Csvg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 7L12.17 7L8.59 10.59L10 12L16 6L10 0L8.59 1.41L12.17 5L1.74846e-07 5L0 7Z" fill="%23FDC420"/%3E%3C/svg%3E%0A') no-repeat center
 
+					&--top
+						transform: rotate(-90deg)
+						grid-column: 3 span
+						margin: 0 auto
+
+					&--left
+						transform: rotate(-180deg)
+					&--center
+						background: $blue
+						width: 12px
+						height: 12px
+						border-radius: 50%
+						margin: 0 auto
+						&:hover
+							background: $yellow
+
+					&--bottom
+						grid-column: 3 span
+						margin: 0 auto
+						transform: rotate(90deg)
 
 				&__block
 					border: 1px solid $smoke
