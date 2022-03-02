@@ -68,7 +68,7 @@ export default {
 			},
 			preview: {
 				background: '',
-				colors: ['#fff', '#000','#b3b3b3'],
+				colors: ['#fff', '#000','#e0e0e0'],
 				input: '#5f8bbf',
 				image: ''
 			},
@@ -203,11 +203,11 @@ export default {
 					position: absolute
 					right: 10px
 					bottom: 10px
-					width: 54px
-					height: 54px
+					width: 50px
+					height: 45px
 					display: grid
 					grid-template-columns: repeat(3,1fr)
-					grid-gap: 5px
+					grid-gap: 3px
 					transition: 0.3s
 					transform: translateY(130%)
 					background: $white
@@ -221,9 +221,9 @@ export default {
 						height: 12px
 						cursor: pointer
 						transition: 0.3s
-						background: url('data:image/svg+xml,%0A%3Csvg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 7L12.17 7L8.59 10.59L10 12L16 6L10 0L8.59 1.41L12.17 5L1.74846e-07 5L0 7Z" fill="%235f8bbf"/%3E%3C/svg%3E%0A') no-repeat center
+						background: url('data:image/svg+xml,%0A%3Csvg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M9 17l5-4.815L9 7.37" stroke="%235f8bbf" stroke-width="1.5"/%3E%3C/svg%3E') no-repeat center
 						&:hover
-							background: url('data:image/svg+xml,%0A%3Csvg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 7L12.17 7L8.59 10.59L10 12L16 6L10 0L8.59 1.41L12.17 5L1.74846e-07 5L0 7Z" fill="%23FDC420"/%3E%3C/svg%3E%0A') no-repeat center
+							background: url('data:image/svg+xml,%0A%3Csvg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M9 17l5-4.815L9 7.37" stroke="%23FDC420" stroke-width="1.5"/%3E%3C/svg%3E') no-repeat center
 
 					&--top
 						transform: rotate(-90deg)

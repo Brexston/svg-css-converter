@@ -3,7 +3,7 @@
     <h1 class="header__title">Конвертируйте свой SVG в CSS </h1>
     <div class="header__description">
         С помощью данного сервиса вы можете закодировать свою иконку
-        SVG для использования в CSS через data URI, закодированный SVG можно
+        SVG для использования в CSS через data URL, закодированный SVG можно
       использовать в <code>background</code>, <code>border-image</code> или в
       <code>mask</code>
     </div>
