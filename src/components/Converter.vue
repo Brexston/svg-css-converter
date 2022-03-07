@@ -22,14 +22,26 @@
 						</div>
 					</div>
 					<div class="preview__block" :style="{'background': preview.background}">
-						<div class="preview__block-image" :style="`background: url(${preview.image}) no-repeat`"></div>
+						<div class="preview__block-image" :style="`background: url(${preview.image}) ${preview.position} ${preview.repeat}`"></div>
 					</div>
-					<div class="preview__direction" :class="{active: insertSvg.textarea}">
-						<div class="preview__direction-item preview__direction--top" @click="changePosition('top')" title="top"></div>
-						<div class="preview__direction-item preview__direction--left" @click="changePosition('left')" title="left"></div>
-						<div class="preview__direction-item preview__direction--center" @click="changePosition('center')" title="center"></div>
-						<div class="preview__direction-item preview__direction--right" @click="changePosition('right')" title="right"></div>
-						<div class="preview__direction-item preview__direction--bottom" @click="changePosition('bottom')" title="bottom"></div>
+					<div class="preview__settings" :class="{active: insertSvg.textarea}">
+						<div class="preview__direction">
+							<div class="preview__direction-item" @click="changePosition('left top')" title="left top"></div>
+							<div class="preview__direction-item" @click="changePosition('center top')" title="center top"></div>
+							<div class="preview__direction-item" @click="changePosition('right top')" title="right top"></div>
+							<div class="preview__direction-item" @click="changePosition('left center')" title="left center"></div>
+							<div class="preview__direction-item" @click="changePosition('center center')" title="center center"></div>
+							<div class="preview__direction-item" @click="changePosition('right center')" title="right center"></div>
+							<div class="preview__direction-item" @click="changePosition('left bottom')" title="left bottom"></div>
+							<div class="preview__direction-item" @click="changePosition('center bottom')" title="center bottom"></div>
+							<div class="preview__direction-item" @click="changePosition('right bottom')" title="right bottom"></div>
+						</div>
+						<div class="preview__repeat">
+							<div class="preview__repeat-item" @click="changeRepeat('no-repeat')">no-repeat</div>
+							<div class="preview__repeat-item" @click="changeRepeat('repeat')">repeat</div>
+							<div class="preview__repeat-item" @click="changeRepeat('repeat-x')">repeat-x</div>
+							<div class="preview__repeat-item" @click="changeRepeat('repeat-y')">repeat-y</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -70,7 +82,9 @@ export default {
 				background: '',
 				colors: ['#fff', '#000','#e0e0e0'],
 				input: '#5f8bbf',
-				image: ''
+				image: '',
+				position: 'left top',
+				repeat: 'no-repeat'
 			},
 			result: {
 				textarea: {
@@ -80,10 +94,8 @@ export default {
 			},
 			settings: {
 				repeat: 'no-repeat',
-				position: 'center'
-
+				position: 'center',
 			},
-			showSettingsPopup: false,
 		}
 	},
 
@@ -129,8 +141,13 @@ export default {
 			this.convertSvg()
 		},
 		changePosition(direction) {
-
 			this.settings.position = direction
+			this.preview.position = direction
+			this.convertSvg()
+		},
+		changeRepeat(repeat) {
+			this.settings.repeat = repeat
+			this.preview.repeat = repeat
 			this.convertSvg()
 		}
 
@@ -167,7 +184,6 @@ export default {
 				flex-direction: column
 				height: 100%
 				position: relative
-				overflow: hidden
 				&__top
 					+flex(space-between,center)
 					margin-bottom: 8px
@@ -199,52 +215,57 @@ export default {
 							opacity: 0
 							width: 100%
 							height: 100%
-				&__direction
+				&__settings
 					position: absolute
-					right: 10px
-					bottom: 10px
-					width: 50px
-					height: 45px
-					display: grid
-					grid-template-columns: repeat(3,1fr)
-					grid-gap: 3px
-					transition: 0.3s
-					transform: translateY(130%)
+					top: 28px
+					right: -25px
+					width: 80px
+					height: calc(100% - 38px)
 					background: $white
-					border-radius: 8px
 					padding: 5px
+					border-radius: 0 5px 5px 0
+					opacity: 0
+					pointer-events: none
+					transition: 0.3s
+					display: flex
+					flex-direction: column
 					&.active
-						transform: translateY(0)
+						transform: translate(100%)
+						opacity: 1
+						pointer-events: auto
+
+				&__direction
+					width: 36px
+					display: grid
+					grid-gap: 1px
+					grid-template-columns: repeat(3,1fr)
+					transition: 0.5s
+					background: $white
+					margin-bottom: 8px
 					&-item
 						display: block
-						width: 16px
+						width: 12px
 						height: 12px
 						cursor: pointer
 						transition: 0.3s
-						background: url('data:image/svg+xml,%0A%3Csvg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M9 17l5-4.815L9 7.37" stroke="%235f8bbf" stroke-width="1.5"/%3E%3C/svg%3E') no-repeat center
-						&:hover
-							background: url('data:image/svg+xml,%0A%3Csvg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M9 17l5-4.815L9 7.37" stroke="%23FDC420" stroke-width="1.5"/%3E%3C/svg%3E') no-repeat center
-
-					&--top
-						transform: rotate(-90deg)
-						grid-column: 3 span
-						margin: 0 auto
-
-					&--left
-						transform: rotate(-180deg)
-					&--center
-						background: $blue
-						width: 12px
-						height: 12px
-						border-radius: 50%
-						margin: 0 auto
-						&:hover
+						border: 1px solid $blue
+						&:hover, &.active
 							background: $yellow
+				&__repeat
+					&-item
+						cursor: pointer
+						padding: 0px 5px
+						border: 1px solid $blue
+						border-radius: 5px
+						+text-style(12px,16px)
+						width: max-content
+						transition: 0.3s
+						&:not(:last-child)
+							margin-bottom: 4px
+						&:hover, &.active
+							background: $yellow
+							
 
-					&--bottom
-						grid-column: 3 span
-						margin: 0 auto
-						transform: rotate(90deg)
 
 				&__block
 					border: 1px solid $smoke
