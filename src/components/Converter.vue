@@ -26,21 +26,10 @@
 					</div>
 					<div class="preview__settings" :class="{active: insertSvg.textarea}">
 						<div class="preview__direction">
-							<div class="preview__direction-item" @click="changePosition('left top')" title="left top"></div>
-							<div class="preview__direction-item" @click="changePosition('center top')" title="center top"></div>
-							<div class="preview__direction-item" @click="changePosition('right top')" title="right top"></div>
-							<div class="preview__direction-item" @click="changePosition('left center')" title="left center"></div>
-							<div class="preview__direction-item" @click="changePosition('center center')" title="center center"></div>
-							<div class="preview__direction-item" @click="changePosition('right center')" title="right center"></div>
-							<div class="preview__direction-item" @click="changePosition('left bottom')" title="left bottom"></div>
-							<div class="preview__direction-item" @click="changePosition('center bottom')" title="center bottom"></div>
-							<div class="preview__direction-item" @click="changePosition('right bottom')" title="right bottom"></div>
+							<div class="preview__direction-item" v-for="position in settings.positionList" :key="position" @click="changePosition(position)" :title="position"></div>
 						</div>
 						<div class="preview__repeat">
-							<div class="preview__repeat-item" @click="changeRepeat('no-repeat')">no-repeat</div>
-							<div class="preview__repeat-item" @click="changeRepeat('repeat')">repeat</div>
-							<div class="preview__repeat-item" @click="changeRepeat('repeat-x')">repeat-x</div>
-							<div class="preview__repeat-item" @click="changeRepeat('repeat-y')">repeat-y</div>
+							<div class="preview__repeat-item" v-for="repeat in settings.repeatList" :key="repeat" @click="changeRepeat(repeat)">{{repeat}}</div>
 						</div>
 					</div>
 				</div>
@@ -80,11 +69,11 @@ export default {
 			},
 			preview: {
 				background: '',
-				colors: ['#fff', '#000','#e0e0e0'],
+				colors: ['#fff','#000','#e0e0e0'],
 				input: '#5f8bbf',
 				image: '',
 				position: 'left top',
-				repeat: 'no-repeat'
+				repeat: 'no-repeat',
 			},
 			result: {
 				textarea: {
@@ -94,7 +83,9 @@ export default {
 			},
 			settings: {
 				repeat: 'no-repeat',
+				repeatList: ['no-repeat','repeat','repeat-x','repeat-y'],
 				position: 'center',
+				positionList: ['left top','center top','right top', 'left center','center','right center','left bottom', 'center bottom','right bottom'],
 			},
 		}
 	},
