@@ -26,10 +26,10 @@
 					</div>
 					<div class="preview__settings" :class="{active: insertSvg.textarea}">
 						<div class="preview__direction">
-							<div class="preview__direction-item" v-for="position in settings.positionList" :key="position" @click="changePosition(position)" :title="position"></div>
+							<div class="preview__direction-item" v-for="position in settings.positionList" :key="position" @click="changePosition(position)" :title="position" :class="{ active: position === settings.position }"></div>
 						</div>
 						<div class="preview__repeat">
-							<div class="preview__repeat-item" v-for="repeat in settings.repeatList" :key="repeat" @click="changeRepeat(repeat)">{{repeat}}</div>
+							<div class="preview__repeat-item" v-for="repeat in settings.repeatList" :key="repeat" @click="changeRepeat(repeat)" :class="{ active: repeat === settings.repeat }">{{repeat}}</div>
 						</div>
 					</div>
 				</div>
@@ -216,6 +216,7 @@ export default {
 					padding: 5px
 					border-radius: 0 5px 5px 0
 					opacity: 0
+					z-index: 5
 					pointer-events: none
 					transition: 0.3s
 					display: flex
