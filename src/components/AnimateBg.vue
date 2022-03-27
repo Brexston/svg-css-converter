@@ -14,6 +14,7 @@
 	top: 0
 	left: 0
 	z-index: -1
+	background: radial-gradient(ellipse at bottom, #5f8bbf 0%, #090A0F 100%)
 	&__item
 		background: transparent
 		&::after

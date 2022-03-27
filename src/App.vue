@@ -31,12 +31,8 @@ export default {
 	width: 100%
 	max-width: 800px
 	background: $white
-	margin: 40px auto
+	margin: 50px auto
 	border-radius: 25px
 	padding: 45px 25px
 	position: relative
-
-
-	
-
 </style>

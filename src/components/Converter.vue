@@ -15,7 +15,7 @@
 					<div class="preview__top">
 						<div class="preview__label">Превью:</div>
 						<div class="preview__bg">
-							<div :style="{'background': color}" v-for="color in preview.colors" :key="color" @click="preview.background = color" class="preview__bg-item"></div>
+							<div class="preview__bg-item" :style="{'background': color}" v-for="color in preview.colors" :key="color" @click="preview.background = color" :class="{ active: preview.background === color }"></div>
 							<div class="preview__bg-input" :style="{'backgroundColor': preview.input}">
 								<input type="color" v-model="preview.input" @input="preview.background = preview.input">
 							</div>
@@ -72,7 +72,7 @@ export default {
 				colors: ['#fff','#000','#e0e0e0'],
 				input: '#5f8bbf',
 				image: '',
-				position: 'left top',
+				position: 'center',
 				repeat: 'no-repeat',
 			},
 			result: {
@@ -188,6 +188,22 @@ export default {
 						cursor: pointer
 						border: 1px solid rgba(0, 0, 0, 0.25)
 						margin-right: 8px
+						transition: 0.3s
+						position: relative
+						&::after
+							content: ''
+							width: 24px
+							height: 24px
+							border-radius: 50%
+							border: 1px solid $blue
+							position: absolute
+							left: -4px
+							top: -4px
+							opacity: 0
+							transition: 0.3s
+						&.active
+							&::after
+								opacity: 1
 					&-input
 						width: 50px
 						height: 18px
