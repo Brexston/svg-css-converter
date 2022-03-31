@@ -3,7 +3,9 @@
 		<Header/>
 		<Converter/>
 		<Footer/>
+		
 	</div>
+	<Tooltip/>
 	<AnimateBg/>
 </template>
 
@@ -12,6 +14,7 @@ import Header from './components/Header'
 import Converter from './components/Converter'
 import Footer from './components/Footer'
 import AnimateBg from './components/AnimateBg'
+import Tooltip from './components/Tooltip'
 
 
 export default {
@@ -19,6 +22,7 @@ export default {
 		Header,
 		Converter,
 		AnimateBg,
+		Tooltip,
 		Footer
 	}
 }
