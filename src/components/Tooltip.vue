@@ -18,6 +18,8 @@ export default {
     },
     methods: {
         checkSvg(string) {
+            string = string.trimStart()
+
             if(string.startsWith("<svg")) {
                 this.showTooltip = true
                 setTimeout(() => this.showTooltip = false, 3000);
@@ -25,7 +27,9 @@ export default {
         }
     }
 }
+
 </script>
+
 
 <style lang="sass">
 .tooltip

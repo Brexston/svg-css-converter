@@ -227,6 +227,7 @@ export default {
 					top: 28px
 					right: -25px
 					width: 80px
+					transform: translate(100%)
 					height: calc(100% - 38px)
 					background: $white
 					padding: 5px
@@ -237,8 +238,7 @@ export default {
 					transition: 0.3s
 					display: flex
 					flex-direction: column
-					&.active
-						transform: translate(100%)
+					&.active				
 						opacity: 1
 						pointer-events: auto
 
@@ -273,15 +273,10 @@ export default {
 						&:hover, &.active
 							background: $yellow
 							
-
-
 				&__block
 					border: 1px solid $smoke
 					height: 100%
 					transition: 0.3s
-					padding: 8px
 					&-image
 						height: 100%
-				
-
 </style>
