@@ -47,7 +47,7 @@
 						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.short"></textarea>
 						<textarea v-else class="textarea__item" v-model="result.textarea.long"></textarea>
 						<div class="copy" @click="copyCss" :class="{active: insertSvg.textarea}">
-							Скопировать
+							{{copyText}}
 						</div>
 					</div>
 				</div>
@@ -64,6 +64,7 @@ export default {
 	data() {
 		return {
 			cssType: 1,
+			copyText: 'Скопировать',
 			insertSvg: {
 				textarea: ''
 			},
@@ -125,6 +126,9 @@ export default {
 		copyCss(event) {
             event.target.previousElementSibling.select()
             document.execCommand("copy")
+			this.copyText = 'Скопировано'
+
+			setTimeout(() => this.copyText = 'Скопировать', 3000);
 		},
 
 		viewExample() {
@@ -165,8 +169,10 @@ export default {
 				background: $blue
 				border-radius: 5px
 				color: $white
-				transition: transform 0.3s
+				transition: transform 0.3s, background 0.6s
 				transform: translateY(115%)
+				&:active
+					background: $yellow
 				&.active
 					transform: translateY(0)
 		&--preview
