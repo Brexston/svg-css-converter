@@ -39,15 +39,19 @@
 					<div class="textarea__top">
 						<label class="textarea__label">Готовый CSS для фона:</label>
 						<div class="textarea__tab">
-							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
-							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Полная запись</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Полная запись</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Короткая запись</div>
+							
 						</div>
 					</div>
 					<div class="textarea__block">
-						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.short"></textarea>
-						<textarea v-else class="textarea__item" v-model="result.textarea.long"></textarea>
-						<div class="copy" @click="copyCss" :class="{active: insertSvg.textarea}">
+						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.long"></textarea>
+						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
+						<div class="textarea__copy" @click="copyCss" :class="{active: insertSvg.textarea}">
 							{{copyText}}
+						</div>
+						<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
+							Убрать ;
 						</div>
 					</div>
 				</div>
@@ -80,13 +84,14 @@ export default {
 				textarea: {
 					short: '',
 					long: ''
-				}
+				},
 			},
 			settings: {
 				repeat: 'no-repeat',
 				repeatList: ['no-repeat','repeat','repeat-x','repeat-y'],
 				position: 'center',
 				positionList: ['left top','center top','right top', 'left center','center','right center','left bottom', 'center bottom','right bottom'],
+				displayCutSemicolon: false
 			},
 		}
 	},
@@ -100,6 +105,7 @@ export default {
 				this.preview.image = `'data:image/svg+xml,${text}'`
 				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
 				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
+				this.settings.displayCutSemicolon = true
 			}
 			else {
 				this.preview.image = ''
@@ -131,6 +137,12 @@ export default {
 			setTimeout(() => this.copyText = 'Скопировать', 3000);
 		},
 
+		removeSemicolon() {
+			this.result.textarea.short = this.result.textarea.short.slice(0, -1)
+			this.result.textarea.long = this.result.textarea.long.replace(/;/g, "")
+			this.settings.displayCutSemicolon = false
+		},
+
 		viewExample() {
 			this.insertSvg.textarea = '<svg width="58" height="59" viewBox="0 0 58 59" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
 			this.convertSvg()
@@ -159,22 +171,26 @@ export default {
 	&__item
 		&--result
 			grid-column: span 2
-			.copy
-				position: absolute
-				right: 10px
-				bottom: 5px
-				cursor: pointer
-				padding: 8px
-				+text-style(14px)
-				background: $blue
-				border-radius: 5px
-				color: $white
-				transition: transform 0.3s, background 0.6s
-				transform: translateY(115%)
-				&:active
-					background: $yellow
-				&.active
-					transform: translateY(0)
+			.textarea
+				&__copy, &__semicolon
+					position: absolute
+					right: 10px
+					bottom: 5px
+					cursor: pointer
+					padding: 8px
+					+text-style(14px)
+					background: $blue
+					border-radius: 5px
+					color: $white
+					transition: transform 0.3s, background 0.6s
+					transform: translateY(115%)
+					&:active
+						background: $yellow
+					&.active
+						transform: translateY(0)
+				&__semicolon
+					right: 120px
+					transition-delay: 0.1s
 		&--preview
 			.preview
 				display: flex 
