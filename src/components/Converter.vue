@@ -47,11 +47,16 @@
 					<div class="textarea__block">
 						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.long"></textarea>
 						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
-						<div class="textarea__copy" @click="copyCss" :class="{active: insertSvg.textarea}">
-							{{copyText}}
-						</div>
-						<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
-							Убрать ;
+						<div class="textarea__settings">
+							<div class="textarea__size active" @click="removeSemicolon" >
+								Добавить размеры
+							</div>
+							<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
+								Sass
+							</div>
+							<div class="textarea__copy" @click="copyCss" :class="{active: insertSvg.textarea}">
+								{{copyText}}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -130,7 +135,7 @@ export default {
 		},
 		
 		copyCss(event) {
-            event.target.previousElementSibling.select()
+            event.target.parentNode.previousElementSibling.select()
             document.execCommand("copy")
 			this.copyText = 'Скопировано'
 
@@ -172,10 +177,15 @@ export default {
 		&--result
 			grid-column: span 2
 			.textarea
-				&__copy, &__semicolon
+				&__settings
 					position: absolute
 					right: 10px
 					bottom: 5px
+					display: flex
+					gap: 5px
+					transition: 0.3s
+				
+				&__copy, &__semicolon, &__size
 					cursor: pointer
 					padding: 8px
 					+text-style(14px)
@@ -184,13 +194,19 @@ export default {
 					color: $white
 					transition: transform 0.3s, background 0.6s
 					transform: translateY(115%)
+					width: 0
+					overflow: hidden
+					padding: 0
 					&:active
 						background: $yellow
 					&.active
 						transform: translateY(0)
+						width: auto
+						padding: 8px
 				&__semicolon
-					right: 120px
 					transition-delay: 0.1s
+				&__size
+					transition-delay: 0.2s
 		&--preview
 			.preview
 				display: flex 
