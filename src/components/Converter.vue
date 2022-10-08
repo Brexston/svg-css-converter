@@ -48,7 +48,7 @@
 						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.long"></textarea>
 						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
 						<div class="textarea__settings">
-							<div class="textarea__size active" @click="removeSemicolon" >
+							<div class="textarea__size" @click="searchSize" :class="{active: settings.displayAddSize }" >
 								Добавить размеры
 							</div>
 							<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
@@ -96,7 +96,8 @@ export default {
 				repeatList: ['no-repeat','repeat','repeat-x','repeat-y'],
 				position: 'center',
 				positionList: ['left top','center top','right top', 'left center','center','right center','left bottom', 'center bottom','right bottom'],
-				displayCutSemicolon: false
+				displayCutSemicolon: false,
+				displayAddSize: false
 			},
 		}
 	},
@@ -111,6 +112,7 @@ export default {
 				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
 				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
 				this.settings.displayCutSemicolon = true
+				this.settings.displayAddSize = true
 			}
 			else {
 				this.preview.image = ''
@@ -143,9 +145,29 @@ export default {
 		},
 
 		removeSemicolon() {
-			this.result.textarea.short = this.result.textarea.short.slice(0, -1)
+			this.result.textarea.short = this.result.textarea.short.replace(/;/g, "")
 			this.result.textarea.long = this.result.textarea.long.replace(/;/g, "")
 			this.settings.displayCutSemicolon = false
+		},
+		
+		addSize(width,height) {
+			this.result.textarea.long = this.result.textarea.long.concat(`\nwidth: ${width}px;`)
+			this.result.textarea.short = this.result.textarea.short.concat(`\nwidth: ${width}px;`)
+			this.result.textarea.long = this.result.textarea.long.concat(`\nheight: ${height}px;`)
+			this.result.textarea.short = this.result.textarea.short.concat(`\nheight: ${height}px;`)
+			
+		},
+
+		searchSize() {
+			let width = this.insertSvg.textarea.match(new RegExp(/width="(\\.|[^"\\])*"/g))
+			let height = this.insertSvg.textarea.match(new RegExp(/height="(\\.|[^"\\])*"/g))
+			if(width && height) {
+				width = parseInt(width[0].match(/\d+/))
+				height = parseInt(height[0].match(/\d+/))
+				this.addSize(width,height)
+			}
+			
+			this.settings.displayAddSize = false
 		},
 
 		viewExample() {
