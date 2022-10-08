@@ -38,16 +38,17 @@
 				<div class="textarea">
 					<div class="textarea__top">
 						<label class="textarea__label">Готовый CSS для фона:</label>
+						<div class="textarea__settings" @click="settings.popupSettingsShow = true"></div>
 						<div class="textarea__tab">
-							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Полная запись</div>
-							<div class="textarea__tab-item" :class="{ active: cssType === 2 }" @click="cssType = 2" >Короткая запись</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 0 }" @click="cssType = 0" >Полная запись</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
 							
 						</div>
 					</div>
 					<div class="textarea__block">
 						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.long"></textarea>
 						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
-						<div class="textarea__settings">
+						<div class="textarea__modification">
 							<div class="textarea__size" @click="searchSize" :class="{active: settings.displayAddSize }" >
 								Добавить размеры
 							</div>
@@ -62,17 +63,20 @@
 				</div>
 			</div>
 		</div>
-
 	</main>
+	<transition name="modal">
+		<PopupSettings v-if="settings.popupSettingsShow" @close="settings.popupSettingsShow = false" />
+	</transition>
 </template>
 
 <script>
+import PopupSettings from "@/components/PopupSettings"
 
 export default {
-	name: "Converter",
+	components: {PopupSettings},
 	data() {
 		return {
-			cssType: 1,
+			cssType:  !localStorage.getItem('short') ? 0 : 1,
 			copyText: 'Скопировать',
 			insertSvg: {
 				textarea: ''
@@ -97,7 +101,8 @@ export default {
 				position: 'center',
 				positionList: ['left top','center top','right top', 'left center','center','right center','left bottom', 'center bottom','right bottom'],
 				displayCutSemicolon: false,
-				displayAddSize: false
+				displayAddSize: false,
+				popupSettingsShow: false
 			},
 		}
 	},
@@ -111,8 +116,9 @@ export default {
 				this.preview.image = `'data:image/svg+xml,${text}'`
 				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
 				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
-				this.settings.displayCutSemicolon = true
-				this.settings.displayAddSize = true
+				
+				!localStorage.getItem('size') ? this.searchSize() : this.settings.displayAddSize = true
+				!localStorage.getItem('sass') ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
 			}
 			else {
 				this.preview.image = ''
@@ -155,7 +161,6 @@ export default {
 			this.result.textarea.short = this.result.textarea.short.concat(`\nwidth: ${width}px;`)
 			this.result.textarea.long = this.result.textarea.long.concat(`\nheight: ${height}px;`)
 			this.result.textarea.short = this.result.textarea.short.concat(`\nheight: ${height}px;`)
-			
 		},
 
 		searchSize() {
@@ -166,7 +171,7 @@ export default {
 				height = parseInt(height[0].match(/\d+/))
 				this.addSize(width,height)
 			}
-			
+
 			this.settings.displayAddSize = false
 		},
 
@@ -199,7 +204,7 @@ export default {
 		&--result
 			grid-column: span 2
 			.textarea
-				&__settings
+				&__modification
 					position: absolute
 					right: 10px
 					bottom: 5px
