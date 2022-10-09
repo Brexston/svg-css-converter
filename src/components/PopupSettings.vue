@@ -27,9 +27,9 @@ export default {
     data() {
         return {
             settings: {
-                size: localStorage.getItem('size'),
-                sass: localStorage.getItem('sass'),
-                short: localStorage.getItem('short'),
+                size: localStorage.getItem('size') || false,
+                sass: localStorage.getItem('sass') || false,
+                short: localStorage.getItem('short') || false
             }
         }
     },

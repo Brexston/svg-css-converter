@@ -41,12 +41,11 @@
 						<div class="textarea__settings" @click="settings.popupSettingsShow = true"></div>
 						<div class="textarea__tab">
 							<div class="textarea__tab-item" :class="{ active: cssType === 0 }" @click="cssType = 0" >Полная запись</div>
-							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>
-							
+							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>			
 						</div>
 					</div>
 					<div class="textarea__block">
-						<textarea v-if="cssType === 1" class="textarea__item" v-model="result.textarea.long"></textarea>
+						<textarea v-if="cssType === 0" class="textarea__item" v-model="result.textarea.long"></textarea>
 						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
 						<div class="textarea__modification">
 							<div class="textarea__size" @click="searchSize" :class="{active: settings.displayAddSize }" >
@@ -76,7 +75,7 @@ export default {
 	components: {PopupSettings},
 	data() {
 		return {
-			cssType:  !localStorage.getItem('short') ? 0 : 1,
+			cssType:  localStorage.getItem('short') === 'true' ? 1 : 0,
 			copyText: 'Скопировать',
 			insertSvg: {
 				textarea: ''
@@ -116,9 +115,9 @@ export default {
 				this.preview.image = `'data:image/svg+xml,${text}'`
 				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
 				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
-				
-				!localStorage.getItem('size') ? this.searchSize() : this.settings.displayAddSize = true
-				!localStorage.getItem('sass') ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
+
+				localStorage.getItem('size') === 'true' ? this.searchSize() : this.settings.displayAddSize = true
+				localStorage.getItem('sass') === 'true' ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
 			}
 			else {
 				this.preview.image = ''
@@ -147,7 +146,7 @@ export default {
             document.execCommand("copy")
 			this.copyText = 'Скопировано'
 
-			setTimeout(() => this.copyText = 'Скопировать', 3000);
+			setTimeout(() => this.copyText = 'Скопировать', 2000);
 		},
 
 		removeSemicolon() {
