@@ -64,7 +64,7 @@
 		</div>
 	</main>
 	<transition name="modal">
-		<PopupSettings v-if="settings.popupSettingsShow" @close="settings.popupSettingsShow = false" />
+		<PopupSettings v-if="settings.popupSettingsShow" @close="settings.popupSettingsShow = false, checkSettings()" />
 	</transition>
 </template>
 
@@ -75,7 +75,7 @@ export default {
 	components: {PopupSettings},
 	data() {
 		return {
-			cssType:  localStorage.getItem('short') === 'true' ? 1 : 0,
+			cssType: localStorage.getItem('short') === 'true' ? 1 : 0,
 			copyText: 'Скопировать',
 			insertSvg: {
 				textarea: ''
@@ -112,9 +112,9 @@ export default {
 			if(text) {
 				text = this.addXmlns(text)
 				text = this.encodeSvg(text)
-				this.preview.image = `'data:image/svg+xml,${text}'`
-				this.result.textarea.short = `background: url('data:image/svg+xml,${text}') ${this.settings.repeat} ${this.settings.position};`
-				this.result.textarea.long = `background-image: url('data:image/svg+xml,${text}');\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
+				this.preview.image = `"data:image/svg+xml,${text}"`
+				this.result.textarea.short = `background: url("data:image/svg+xml,${text}") ${this.settings.repeat} ${this.settings.position};`
+				this.result.textarea.long = `background-image: url("data:image/svg+xml,${text}");\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
 
 				localStorage.getItem('size') === 'true' ? this.searchSize() : this.settings.displayAddSize = true
 				localStorage.getItem('sass') === 'true' ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
@@ -134,10 +134,10 @@ export default {
 		},
 
 		encodeSvg(text) {
-			text = text.replace(/'/g, `"`);		
 			text = text.replace(/>\s{1,}</g, `><`);
 			text = text.replace(/\s{2,}/g, ` `);
-			const symbols = /[\r\n%#()<>?[\\\]^`{|}]/g;			
+			text = text.replace(/"/g, `'`);	
+			const symbols = /[\r\n%#()<>?[\\\]^`{|}]/g;		
 			return text.replace(symbols, encodeURIComponent);
 		},
 		
@@ -187,9 +187,14 @@ export default {
 			this.settings.repeat = repeat
 			this.preview.repeat = repeat
 			this.convertSvg()
+		},
+		checkSettings() {
+			this.convertSvg()
+			this.cssType = localStorage.getItem('short') === 'true' ? 1 : 0
 		}
 
-	}
+
+	},
 }
 </script>
 
