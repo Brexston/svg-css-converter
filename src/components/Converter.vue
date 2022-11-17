@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 import PopupSettings from "@/components/PopupSettings"
 
 export default {
@@ -191,10 +192,13 @@ export default {
 		checkSettings() {
 			this.convertSvg()
 			this.cssType = localStorage.getItem('short') === 'true' ? 1 : 0
-		}
-
-
+		},
+		...mapActions(['loadTranslate']),
 	},
+	//computed: mapGetters(['getLanguages']),
+	async mounted() {
+		this.loadTranslate()
+	}
 }
 </script>
 

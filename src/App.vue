@@ -26,6 +26,8 @@ export default {
 		Footer
 	}
 }
+
+
 </script>
 
 <style lang="sass">
