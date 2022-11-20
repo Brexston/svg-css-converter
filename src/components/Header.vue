@@ -1,15 +1,15 @@
 <template>
   <header class="header">
-    <h1 class="header__title">Конвертируйте свой SVG в CSS </h1>
+    <h1 class="header__title">Конвертируйте свой SVG в CSS</h1>
     <div class="header__description">
         С помощью данного сервиса вы можете закодировать свою иконку
         SVG для использования в CSS через data URL, закодированный SVG можно
       использовать в <code>background</code>, <code>border-image</code> или в
       <code>mask</code>
     </div>
+    <TextElement :code="'title'" :defaultText="'Конвертируйте свой SVG в CSS'"></TextElement>
   </header>
 </template>
-
 <style lang="sass">
 .header
     padding: 0 0 18px
@@ -30,3 +30,12 @@
             padding: 0 4px
             font-style: italic
 </style>
+
+<script>
+import TextElement from "@/components/TextElement"
+
+export default {
+  name: 'Header',
+  components: {TextElement}
+}
+</script>

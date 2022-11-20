@@ -1,14 +1,32 @@
 {
   "ru": {
-    "userId": 1,
-    "id": 1,
-    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+	"title": "Конвертируйте свой SVG в CSS",
+	"description": "С помощью данного сервиса вы можете закодировать свою иконку SVG для использования в CSS через data URL, закодированный SVG можно использовать в <code>background</code>, <code>border-image</code> или в <code>mask</code>",
+	"insertSvg": "Вставьте код SVG:",
+	"example": "Пример",
+	"preview": "Превью:",
+	"readyCss": "Готовый CSS для фона:",
+	"fullRecording": "Полная запись",
+	"shortRecording": "Короткая запись",
+	"conversionSettings": "Настройки конвертации",
+	"addCss": "Всегда добавлять размеры в итоговый CSS",
+	"removeSemicolon": "Убирать ; для использования в Sass",
+	"useShortRecording": "Использовать короткую запись по умолчанию",
+	"save": "Сохранить"
   },
   "en": {
-    "userId": 1,
-    "id": 2,
-    "title": "qui est esse",
-    "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+	"title": "Convert your svg to css",
+	"description": "С помощью данного сервиса вы можете закодировать свою иконку SVG для использования в CSS через data URL, закодированный SVG можно использовать в background, border-image или в mask ",
+	"insertSvg": "Insert the SVG code:",
+	"example": "Example",
+	"preview": "Preview:",
+	"readyCss": "Result:",
+	"fullRecording": "Full Recording",
+	"shortRecording": "Short Recording",
+	"conversionSettings": "Conversion settings",
+	"addCss": "Always add size to the final CSS",
+	"removeSemicolon": "Remove ; for use in Sass",
+	"useShortRecording": "Use default short entry",
+	"save": "Save"
   }
 }

@@ -3,18 +3,19 @@
 		<Header/>
 		<Converter/>
 		<Footer/>
-		
 	</div>
 	<Tooltip/>
 	<AnimateBg/>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Header from './components/Header'
 import Converter from './components/Converter'
 import Footer from './components/Footer'
 import AnimateBg from './components/AnimateBg'
 import Tooltip from './components/Tooltip'
+
 
 
 export default {
@@ -24,7 +25,14 @@ export default {
 		AnimateBg,
 		Tooltip,
 		Footer
-	}
+	},
+    methods: {
+        ...mapActions(['loadTranslate']),
+    },
+	async mounted() {
+        this.loadTranslate()
+    },
+	computed: mapGetters(['isLoaded']),
 }
 
 

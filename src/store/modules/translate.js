@@ -1,12 +1,11 @@
 export default {
     state: {
-        languages: {}
+        languages: {},
     },
     
     actions: {
         async loadTranslate({commit}) {
-            const response = await fetch('../translate/translate.json')
-            const languages = await response.json()
+            const languages = require('../../translate/translate.json')
 
             commit('updateLanguage', languages)
         }
@@ -19,6 +18,11 @@ export default {
     getters: {
         getLanguages(state) {
             return state.languages
+        },
+        getTranslation(state) {
+            return (lang,code) => {
+                return state.languages[lang][code]
+            }
         }
     }
 }
