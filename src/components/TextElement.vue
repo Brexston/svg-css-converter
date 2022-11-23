@@ -1,6 +1,5 @@
 <template>
-    <!-- <div class="test" @click="getTranslate()">1111</div> -->
-    <span></span>
+    {{this.getTranslation('ru',this.code)}}
 </template>
 
 <script>
@@ -18,14 +17,6 @@ export default {
             default: "",
         },
     },
-    methods: {
-        getTranslate() {
-            console.log(this.getTranslation('ru',this.code));
-        }
-    },
-
     computed: mapGetters(['getTranslation']),
-
 }
-
 </script>

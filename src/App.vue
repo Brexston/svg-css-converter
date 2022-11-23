@@ -1,5 +1,5 @@
 <template>
-	<div class="layout">
+	<div class="layout" v-if="getLoadedStatus">
 		<Header/>
 		<Converter/>
 		<Footer/>
@@ -32,7 +32,7 @@ export default {
 	async mounted() {
         this.loadTranslate()
     },
-	computed: mapGetters(['isLoaded']),
+	computed: mapGetters(['getLoadedStatus']),
 }
 
 
