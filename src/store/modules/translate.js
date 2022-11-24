@@ -1,6 +1,7 @@
 export default {
     state: {
         languages: {},
+        currentLanguage: 'ru',
         isLoaded: false
     },
     
@@ -9,7 +10,6 @@ export default {
             const languages = require('../../translate/translate.json')
             commit('updateLanguage', languages)
             commit('updateStatusLoading')
-
         }
     },
     mutations: {
@@ -18,6 +18,9 @@ export default {
         },
         updateStatusLoading(state) {
             state.isLoaded = true
+        },
+        updateCurrentLanguage(state,lang) {
+            state.currentLanguage = lang
         }
     },
     getters: {
@@ -25,8 +28,8 @@ export default {
             return state.languages
         },
         getTranslation(state) {
-            return (lang,code) => {
-                return state.languages[lang][code]
+            return (code,defaultText) => {
+                return state.languages[state.currentLanguage][code] ? state.languages[state.currentLanguage][code] : defaultText
             }
         },
         getLoadedStatus(state) {

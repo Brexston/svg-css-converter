@@ -1,5 +1,5 @@
 <template>
-    {{this.getTranslation('ru',this.code)}}
+    <span v-html="this.getTranslation(this.code, this.defaultText)"></span>
 </template>
 
 <script>
