@@ -72,6 +72,7 @@
 import PopupSettings from "@/components/PopupSettings"
 
 export default {
+	name: 'Converter',
 	components: {PopupSettings},
 	data() {
 		return {

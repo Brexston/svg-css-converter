@@ -7,14 +7,17 @@
 
 <script>
 export default {
+    name: "Tooltip",
     data() {
         return {
             showTooltip: false
         }
     },
     async mounted() {
-        let clipboardText = await navigator?.clipboard?.readText()
-        this.checkSvg(clipboardText)
+        try {
+            let clipboardText = await navigator?.clipboard?.readText()
+            this.checkSvg(clipboardText)
+        }  catch (e) {}
     },
     methods: {
         checkSvg(string) {

@@ -45,7 +45,7 @@ export default {
 	width: 100%
 	max-width: 800px
 	background: $white
-	margin: 50px auto
+	margin: 60px auto
 	border-radius: 25px
 	padding: 45px 25px
 	position: relative

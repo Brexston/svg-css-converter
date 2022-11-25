@@ -24,16 +24,14 @@ export default {
         }
     },
     getters: {
-        getLanguages(state) {
-            return state.languages
-        },
+        getLanguages: state => state.languages,
+        getLoadedStatus: state => state.isLoaded,
+        getCurrentLanguage: state => state.currentLanguage,
         getTranslation(state) {
             return (code,defaultText) => {
                 return state.languages[state.currentLanguage][code] ? state.languages[state.currentLanguage][code] : defaultText
             }
         },
-        getLoadedStatus(state) {
-            return state.isLoaded
-        }
+        
     }
 }

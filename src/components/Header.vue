@@ -7,7 +7,13 @@
 			<TextElement :code="'description'" :defaultText="'С помощью данного сервиса вы можете закодировать свою иконку SVG для использования в CSS через data URL, закодированный SVG можно использовать в <code>background</code>, <code>border-image</code> или в code>mask</code>'"></TextElement>
 		</div>
 		<div class="header__language">
-			<div class="header__language-item" v-for="lang in getLanguages" :key="lang" @click="this.updateCurrentLanguage(lang.languageName)">{{lang.languageName}}</div>
+			<div class="header__language-item" 
+				v-for="lang in getLanguages" :key="lang" 
+				@click="this.updateCurrentLanguage(lang.languageName)"
+				:class="{active : getCurrentLanguage === lang.languageName}"
+				>
+				{{lang.languageName}}
+			</div>
 		</div>
 	</header>
 </template>
@@ -36,10 +42,13 @@
 		left: 25px
 		display: flex
 		grid-gap: 10px
-		font-weight: 500
+		color: $black
 		&-item
 			cursor: pointer
-			text-transform: capitalize 
+			text-transform: capitalize
+			transition: 0.3s
+			&.active
+				color: $yellow
 </style>
 
 <script>
@@ -50,6 +59,7 @@ export default {
   name: 'Header',
   components: {TextElement},
   methods: mapMutations(['updateCurrentLanguage']),
-  computed: mapGetters(['getLanguages']),
+  computed: mapGetters(['getLanguages', 'getCurrentLanguage'])
+
 }
 </script>
