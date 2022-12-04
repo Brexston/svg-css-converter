@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "r": "^0.0.5",
     "sass": "^1.43.4",
     "vue": "^3.2.13",
+    "vue-route": "^1.5.1",
+    "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

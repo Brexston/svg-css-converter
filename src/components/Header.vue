@@ -9,10 +9,9 @@
 		<div class="header__language">
 			<div class="header__language-item" 
 				v-for="lang in getLanguages" :key="lang" 
-				@click="this.updateCurrentLanguage(lang.languageName)"
 				:class="{active : getCurrentLanguage === lang.languageName}"
 				>
-				{{lang.languageName}}
+				<router-link :to="lang.languageName">{{lang.languageName}}</router-link>
 			</div>
 		</div>
 	</header>
@@ -47,6 +46,7 @@
 			cursor: pointer
 			text-transform: capitalize
 			transition: 0.3s
+			color: $black
 			&.active
 				color: $yellow
 </style>
@@ -58,6 +58,14 @@ import {mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'Header',
   components: {TextElement},
+  mounted() {
+	this.updateCurrentLanguage(this.$router.currentRoute._rawValue.params['lang'])
+  },
+  watch: {
+	$route(toR) {
+		this.updateCurrentLanguage(toR.params.id)
+	}
+  },
   methods: mapMutations(['updateCurrentLanguage']),
   computed: mapGetters(['getLanguages', 'getCurrentLanguage'])
 
