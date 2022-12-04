@@ -1,13 +1,16 @@
 <template>
     <div class="tooltip" :class="{visible: showTooltip}" @click="this.showTooltip = false">
-        В вашем буфере обмена есть код SVG, нажмите Ctrl + V для конвертации
+        <TextElement :code="'tooltip'" :defaultText="'В твоем буфере обмена есть SVG код, нажми CTRL + V для конвертации'"/>
     </div>
 </template>
 
 
 <script>
+import TextElement from "@/components/TextElement"
+
 export default {
     name: "Tooltip",
+    components: {TextElement},
     data() {
         return {
             showTooltip: false

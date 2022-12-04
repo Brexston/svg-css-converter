@@ -1,18 +1,15 @@
 <template>
 	<header class="header">
 		<h1 class="header__title">
-			<TextElement :code="'title'" :defaultText="'Конвертируйте свой SVG в CSS'"></TextElement>
+			<TextElement :code="'title'" :defaultText="'Конвертируйте свой SVG в CSS'" />
 		</h1>
 		<div class="header__description">
-			<TextElement :code="'description'" :defaultText="'С помощью данного сервиса вы можете закодировать свою иконку SVG для использования в CSS через data URL, закодированный SVG можно использовать в <code>background</code>, <code>border-image</code> или в code>mask</code>'"></TextElement>
+			<TextElement :code="'description'"
+				:defaultText="'С помощью данного сервиса вы можете закодировать свою иконку SVG для использования в CSS через data URL, закодированный SVG можно использовать в <code>background</code>, <code>border-image</code> или в code>mask</code>'" />
 		</div>
 		<div class="header__language">
-			<div class="header__language-item" 
-				v-for="lang in getLanguages" :key="lang" 
-				:class="{active : getCurrentLanguage === lang.languageName}"
-				>
-				<router-link :to="lang.languageName">{{lang.languageName}}</router-link>
-			</div>
+			<router-link v-for="lang in getLanguages" :key="lang" class="header__language-item" active-class="active"
+				:to="lang.languageName">{{ lang.languageName }}</router-link>
 		</div>
 	</header>
 </template>
@@ -40,15 +37,19 @@
 		top: 10px
 		left: 25px
 		display: flex
-		grid-gap: 10px
 		color: $black
 		&-item
-			cursor: pointer
-			text-transform: capitalize
 			transition: 0.3s
 			color: $black
+			padding: 1px 6px
+			border-radius: 4px
+			text-transform: capitalize
+			+text-style(15px)
 			&.active
-				color: $yellow
+				color: $white
+				background: $blue
+				pointer-events: none
+				
 </style>
 
 <script>
@@ -56,18 +57,18 @@ import TextElement from "@/components/TextElement"
 import {mapGetters, mapMutations} from 'vuex'
 
 export default {
-  name: 'Header',
-  components: {TextElement},
-  mounted() {
-	this.updateCurrentLanguage(this.$router.currentRoute._rawValue.params['lang'])
-  },
-  watch: {
-	$route(toR) {
-		this.updateCurrentLanguage(toR.params.id)
-	}
-  },
-  methods: mapMutations(['updateCurrentLanguage']),
-  computed: mapGetters(['getLanguages', 'getCurrentLanguage'])
+	name: 'Header',
+	components: {TextElement},
+	created() {
+		this.updateCurrentLanguage(this.$router.currentRoute._rawValue.params['lang'] || 'ru')
+	},
+	watch: {
+		$route(to) {
+			this.updateCurrentLanguage(to.params.lang)
+		}
+	},
+	methods: mapMutations(['updateCurrentLanguage']),
+	computed: mapGetters(['getLanguages', 'getCurrentLanguage'])
 
 }
 </script>

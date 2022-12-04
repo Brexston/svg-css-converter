@@ -1,30 +1,43 @@
 <template>
     <div class="popup" @click.self="$emit('close')">
         <div class="popup__block">
-            <div class="popup__title">Настройки конвертации</div>
+            <div class="popup__title">
+                <TextElement :code="'conversionSettings'" :defaultText="'Настройки конвертации'"/>
+            </div>
             <div class="popup__settings">
                 <div class="checkbox">
                     <input type="checkbox" id="size" v-model="settings.size">
-                    <label for="size">Всегда добавлять размеры в итоговый CSS</label>
+                    <label for="size">
+                        <TextElement :code="'addCss'" :defaultText="'Всегда добавлять размеры в итоговый CSS'"/>
+                    </label>
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" id="sass" v-model="settings.sass">
-                    <label for="sass">Убирать ; для использования в Sass</label>
+                    <label for="sass">
+                        <TextElement :code="'removeSemicolon'" :defaultText="'Убирать ; для использования в Sass'"/>
+                    </label>
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" id="short" v-model="settings.short">
-                    <label for="short">Использовать короткую запись по умолчанию</label>
+                    <label for="short">
+                        <TextElement :code="'useShortRecording'" :defaultText="'Использовать короткую запись по умолчанию'"/>
+                    </label>
                 </div>
             </div>
-            <div class="popup__btn btn" @click="saveSettings">Сохранить</div>
+            <div class="popup__btn btn" @click="saveSettings">
+                <TextElement :code="'save'" :defaultText="'Сохранить'"/>
+            </div>
         </div>
     </div>
 </template>
 
 
 <script>
+import TextElement from "@/components/TextElement"
+
 export default {
     name: 'PopupSettings',
+    components: {TextElement},
     data() {
         return {
             settings: {
@@ -44,8 +57,3 @@ export default {
     }
 }
 </script>
-
-<style lang="sass">
-.popup
-    position: absolute
-</style>

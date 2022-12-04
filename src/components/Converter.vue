@@ -4,8 +4,12 @@
 			<div class="converter__item converter__item--insert">
 				<div class="textarea">
 					<div class="textarea__top">
-						<label for="insert" class="textarea__label">Вставьте код SVG:</label>
-						<button class="textarea__example" @click="viewExample">Пример</button>
+						<label for="insert" class="textarea__label">
+							<TextElement :code="'insertSvg'" :defaultText="'Вставьте код SVG:'"/>
+						</label>
+						<button class="textarea__example" @click="viewExample">
+							<TextElement :code="'example'" :defaultText="'Пример'"/>
+						</button>
 					</div>
 					<textarea id="insert" autofocus class="textarea__item" v-on:input="convertSvg" v-model="insertSvg.textarea"></textarea>
 				</div>
@@ -13,7 +17,9 @@
 			<div class="converter__item converter__item--preview">
 				<div class="preview">
 					<div class="preview__top">
-						<div class="preview__label">Превью:</div>
+						<div class="preview__label">
+							<TextElement :code="'preview'" :defaultText="'Превью'"/>
+						</div>
 						<div class="preview__bg">
 							<div class="preview__bg-item" :style="{'background': color}" v-for="color in preview.colors" :key="color" @click="preview.background = color" :class="{ active: preview.background === color }"></div>
 							<div class="preview__bg-input" :style="{'backgroundColor': preview.input}">
@@ -37,11 +43,17 @@
 			<div class="converter__item converter__item--result">
 				<div class="textarea">
 					<div class="textarea__top">
-						<label class="textarea__label">Готовый CSS для фона:</label>
+						<label class="textarea__label">
+							<TextElement :code="'readyCss'" :defaultText="'Готовый CSS для фона:'"/>
+						</label>
 						<div class="textarea__settings" @click="settings.popupSettingsShow = true"></div>
 						<div class="textarea__tab">
-							<div class="textarea__tab-item" :class="{ active: cssType === 0 }" @click="cssType = 0" >Полная запись</div>
-							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >Короткая запись</div>			
+							<div class="textarea__tab-item" :class="{ active: cssType === 0 }" @click="cssType = 0" >
+								<TextElement :code="'fullRecording'" :defaultText="'Полная запись'"/>
+							</div>
+							<div class="textarea__tab-item" :class="{ active: cssType === 1 }" @click="cssType = 1" >
+								<TextElement :code="'shortRecording'" :defaultText="'Short Recording'"/>
+							</div>			
 						</div>
 					</div>
 					<div class="textarea__block">
@@ -49,13 +61,13 @@
 						<textarea v-else class="textarea__item" v-model="result.textarea.short"></textarea>
 						<div class="textarea__modification">
 							<div class="textarea__size" @click="searchSize" :class="{active: settings.displayAddSize }" >
-								Добавить размеры
+								<TextElement :code="'addSize'" :defaultText="'Добавить размеры'"/>
 							</div>
 							<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
 								Sass
 							</div>
 							<div class="textarea__copy" @click="copyCss" :class="{active: insertSvg.textarea}">
-								{{copyText}}
+								<TextElement :code="'copy'" :defaultText="'Скопировать'"/>
 							</div>
 						</div>
 					</div>
@@ -70,14 +82,14 @@
 
 <script>
 import PopupSettings from "@/components/PopupSettings"
+import TextElement from "@/components/TextElement"
 
 export default {
 	name: 'Converter',
-	components: {PopupSettings},
+	components: {PopupSettings,TextElement},
 	data() {
 		return {
 			cssType: localStorage.getItem('short') === 'true' ? 1 : 0,
-			copyText: 'Скопировать',
 			insertSvg: {
 				textarea: ''
 			},
@@ -143,11 +155,9 @@ export default {
 		},
 		
 		copyCss(event) {
-            event.target.parentNode.previousElementSibling.select()
+			console.log(event.target.closest('.textarea__modification'))
+            event.target.closest('.textarea__modification').previousElementSibling.select()
             document.execCommand("copy")
-			this.copyText = 'Скопировано'
-
-			setTimeout(() => this.copyText = 'Скопировать', 2000);
 		},
 
 		removeSemicolon() {
@@ -176,7 +186,7 @@ export default {
 		},
 
 		viewExample() {
-			this.insertSvg.textarea = '<svg width="58" height="59" viewBox="0 0 58 59" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
+			this.insertSvg.textarea = '<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="58" height="58.0078" rx="29" fill="#FDC420"/><path d="M38.4355 29.0039L24.2943 37.1673L24.2943 20.8405L38.4355 29.0039Z" fill="#1D1D1C"/></svg>'
 			this.convertSvg()
 		},
 		changePosition(direction) {

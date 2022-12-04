@@ -1,11 +1,13 @@
 <template>
 	<div class="layout" v-if="getLoadedStatus">
-		<Header/>
-		<Converter/>
-		<Footer/>
+		<div class="container">
+			<Header/>
+			<Converter/>
+			<Footer/>
+		</div>
+		<Tooltip/>
+		<AnimateBg/>
 	</div>
-	<Tooltip/>
-	<AnimateBg/>
 </template>
 
 <script>
@@ -41,7 +43,7 @@ export default {
 <style lang="sass">
 @import "@/assets/sass/main"
 
-.layout
+.container
 	width: 100%
 	max-width: 800px
 	background: $white

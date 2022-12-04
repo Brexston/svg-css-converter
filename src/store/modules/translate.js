@@ -29,7 +29,6 @@ export default {
         getCurrentLanguage: state => state.currentLanguage,
         getTranslation(state) {
             return (code,defaultText) => {
-                console.log(state.languages)
                 return state.languages[state.currentLanguage][code] ? state.languages[state.currentLanguage][code] : defaultText
             }
         },
