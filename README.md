@@ -32,6 +32,9 @@ With this service, you can encode your SVG icon for use in CSS via data URL, enc
 
 You can add your language with Pull Request to the json file at \svg-css-converter\src\translate\translate.json.
 I will also be glad to correct mistranslated words :)
+<br><br><br>
+<hr>
+<br><br><br>
 
 
 # https://brexston.github.io/svg-css-converter/#/ru
