@@ -66,6 +66,9 @@
 							<div class="textarea__semicolon" @click="removeSemicolon" :class="{active: settings.displayCutSemicolon }">
 								Sass
 							</div>
+							<div class="textarea__mask" @click="replaceMask" :class="{active: settings.displayMask }">
+								Mask
+							</div>							
 							<div class="textarea__copy" @click="copyCss" :class="{active: insertSvg.textarea}">
 								<TextElement :code="'copy'" :defaultText="'Скопировать'"/>
 							</div>
@@ -114,7 +117,8 @@ export default {
 				positionList: ['left top','center top','right top', 'left center','center','right center','left bottom', 'center bottom','right bottom'],
 				displayCutSemicolon: false,
 				displayAddSize: false,
-				popupSettingsShow: false
+				displayMask: false,
+				popupSettingsShow: false,
 			},
 		}
 	},
@@ -128,9 +132,10 @@ export default {
 				this.preview.image = `"data:image/svg+xml,${text}"`
 				this.result.textarea.short = `background: url("data:image/svg+xml,${text}") ${this.settings.repeat} ${this.settings.position};`
 				this.result.textarea.long = `background-image: url("data:image/svg+xml,${text}");\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
-
+				
 				localStorage.getItem('size') === 'true' ? this.searchSize() : this.settings.displayAddSize = true
 				localStorage.getItem('sass') === 'true' ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
+				this.settings.displayMask = true
 			}
 			else {
 				this.preview.image = ''
@@ -165,7 +170,10 @@ export default {
 			this.result.textarea.long = this.result.textarea.long.replace(/;/g, "")
 			this.settings.displayCutSemicolon = false
 		},
-		
+		replaceMask() {
+			this.result.textarea.long = this.result.textarea.long.replaceAll("background", "mask")
+			this.settings.displayMask = false
+		},
 		addSize(width,height) {
 			this.result.textarea.long = this.result.textarea.long.concat(`\nwidth: ${width}px;`)
 			this.result.textarea.short = this.result.textarea.short.concat(`\nwidth: ${width}px;`)
@@ -225,7 +233,7 @@ export default {
 					gap: 5px
 					transition: 0.3s
 				
-				&__copy, &__semicolon, &__size
+				&__copy, &__semicolon, &__size, &__mask
 					cursor: pointer
 					padding: 8px
 					+text-style(14px)
@@ -242,11 +250,15 @@ export default {
 					&.active
 						transform: translateY(0)
 						width: auto
-						padding: 8px
-				&__semicolon
+						padding: 8px			
+				&__mask
 					transition-delay: 0.1s
+				&__semicolon
+					transition-delay: 0.2s						
 				&__size
-					transition-delay: 0.2s
+					transition-delay: 0.3s
+				&__item
+					min-height: 170px
 		&--preview
 			.preview
 				display: flex 
