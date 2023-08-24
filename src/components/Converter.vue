@@ -131,7 +131,7 @@ export default {
 				text = this.encodeSvg(text)
 				this.preview.image = `"data:image/svg+xml,${text}"`
 				this.result.textarea.short = `background: url("data:image/svg+xml,${text}") ${this.settings.repeat} ${this.settings.position};`
-				this.result.textarea.long = `background-image: url("data:image/svg+xml,${text}");\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};`
+				this.result.textarea.long = `background-image: url("data:image/svg+xml,${text}");\nbackground-repeat: ${this.settings.repeat};\nbackground-position: ${this.settings.position};\nbackground-size: 100%;`
 				
 				localStorage.getItem('size') === 'true' ? this.searchSize() : this.settings.displayAddSize = true
 				localStorage.getItem('sass') === 'true' ? this.removeSemicolon() : this.settings.displayCutSemicolon = true
