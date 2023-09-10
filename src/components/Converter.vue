@@ -160,7 +160,6 @@ export default {
 		},
 		
 		copyCss(event) {
-			console.log(event.target.closest('.textarea__modification'))
             event.target.closest('.textarea__modification').previousElementSibling.select()
             document.execCommand("copy")
 		},
@@ -173,12 +172,11 @@ export default {
 		replaceMask() {
 			this.result.textarea.long = this.result.textarea.long.replaceAll("background", "mask")
 			this.settings.displayMask = false
+			this.cssType = 0
 		},
 		addSize(width,height) {
-			this.result.textarea.long = this.result.textarea.long.concat(`\nwidth: ${width}px;`)
-			this.result.textarea.short = this.result.textarea.short.concat(`\nwidth: ${width}px;`)
-			this.result.textarea.long = this.result.textarea.long.concat(`\nheight: ${height}px;`)
-			this.result.textarea.short = this.result.textarea.short.concat(`\nheight: ${height}px;`)
+			this.result.textarea.long += `\nwidth: ${width}px;\nheight: ${height}px;`;
+			this.result.textarea.short += `\nwidth: ${width}px;\nheight: ${height}px;`;
 		},
 
 		searchSize() {
@@ -250,7 +248,10 @@ export default {
 					&.active
 						transform: translateY(0)
 						width: auto
-						padding: 8px			
+						padding: 8px
+				&__copy
+					background: $yellow
+					color: $black
 				&__mask
 					transition-delay: 0.1s
 				&__semicolon
