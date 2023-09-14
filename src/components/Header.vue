@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="header__title">
-			<TextElement :code="'title'" :defaultText="'Конвертируйте свой SVG в CSS'" />
+			<TextElement :code="'title'" :defaultText="'Онлайн-конвертер из SVG в CSS'" />
 		</h1>
 		<div class="header__description">
 			<TextElement :code="'description'"
