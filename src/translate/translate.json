@@ -36,5 +36,24 @@
 	"removeSemicolon": "Remove ; for use in Sass",
 	"useShortRecording": "Use default short entry",
 	"save": "Save"
+  },
+"de": {
+	"languageName": "de",
+	"tooltip": "Sie haben SVG-Code in Ihrer Zwischenablage, drücken Sie CTRL + V, um ihn zu konvertieren",
+	"title": "Online SVG zu CSS Konverter",
+	"description": "Mit diesem Service können Sie Ihr SVG-Symbol für die Verwendung in CSS über eine data URL codieren, das codierte SVG kann in <code>background</code>, <code>border-image</code> oder in <code>mask-image</code> verwendet werden",
+	"insertSvg": "Fügen Sie den SVG-Code ein:",
+	"example": "Ein Beispiel",
+	"preview": "Vorschau:",
+	"readyCss": "Ergebnis:",
+	"fullRecording": "Vollständiger Eintrag",
+	"shortRecording": "Kurzer Datensatz",
+	"copy": "Kopieren",
+	"addSize": "Abmessungen hinzufügen",
+	"conversionSettings": "Einstellungen für die Konvertierung",
+	"addCss": "Fügen Sie dem endgültigen CSS immer Abmessungen hinzu",
+	"removeSemicolon": "; zur Verwendung in Sass entfernen",
+	"useShortRecording": "Verwenden Sie den Standard-Kurzsatz",
+	"save": "Speichern Sie"
   }
 }
