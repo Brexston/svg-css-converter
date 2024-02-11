@@ -1,14 +1,15 @@
-import {createRouter, createWebHashHistory } from 'vue-router'
+
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
         path: '/',
         name: 'Frontpage',
-        component: () => import("./views/Frontpage"),
+        component: () => import('./components/HelloWorld.vue'),
     },
     {
         path: '/:lang',
-        component: () => import("./views/Frontpage"),
+        component: () => import("../components/HelloWorld.vue"),
     }
 ]
 
