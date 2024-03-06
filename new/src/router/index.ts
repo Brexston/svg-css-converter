@@ -1,16 +1,17 @@
 
 import { createRouter, createWebHashHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router';
 
-const routes = [
+const routes: RouteRecordRaw[] = [
     {
-        path: '/',
-        name: 'Frontpage',
-        component: () => import('./components/HelloWorld.vue'),
+        path: '/' as string,
+        name: 'MainLayout' as string,
+        component: () => import('@/components/layouts/MainLayout.vue'),
     },
-    {
-        path: '/:lang',
-        component: () => import("../components/HelloWorld.vue"),
-    }
+    // {
+    //     path: '/:lang',
+    //     component: () => import("@/components/layouts/MainLayout.vue"),
+    // }
 ]
 
 
